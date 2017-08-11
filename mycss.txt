@@ -1,0 +1,49 @@
+QComboBox{
+	border: 2px solid gray;
+	border-radius: 5px;
+}
+QGroupBox{
+    margin-top: 0.5em;
+    font: 14px arial;
+    color: black;
+	border: 3px solid gray;
+	border-radius: 20px;
+}
+
+QGroupBox::title {
+    top: -6px;
+    left: 15px;
+}
+QMenuBar{
+	background-color: rgb(252, 221, 255);
+}
+QMainWindow{
+	background-color: qlineargradient(spread:pad, x1:1, y1:1, x2:1, y2:0, stop:0 rgba(237, 162, 245, 255), stop:1 rgba(231, 231, 231, 255));
+}
+
+QPushButton {    
+	
+	background-color: qlineargradient(spread:repeat, x1:1, y1:1, x2:1, y2:0, stop:0 rgba(170, 134, 255, 237), stop:0.970149 rgba(255, 171, 254, 221));
+    border-style: outset;
+    border-width: 3px;
+	border-radius: 5px;
+    border-color: rgb(243, 152, 255); }
+QLabel { 
+	
+	background-color: rgb(202, 202, 202);
+	border-style: inset ; 
+    border-width: 2px;
+    border-color: rgb(127, 127, 127); 
+	border-radius: 5px}
+QDoubleSpinBox{
+	border: 2px solid gray;
+	border-radius: 5px;
+	background-color: rgb(231, 198, 228);
+	border-color:rgb(255, 230, 255);
+    }
+
+QListWidget {
+	border: 3px solid gray;
+	border-radius: 20px;
+	background: white;
+}

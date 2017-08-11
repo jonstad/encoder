@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<projectDescription>
+	<name>EncoderGenerator</name>
+	<comment></comment>
+	<projects>
+	</projects>
+	<buildSpec>
+		<buildCommand>
+			<name>org.python.pydev.PyDevBuilder</name>
+			<arguments>
+			</arguments>
+		</buildCommand>
+	</buildSpec>
+	<natures>
+		<nature>org.python.pydev.pythonNature</nature>
+	</natures>
+	<linkedResources>
+		<link>
+			<name>findserialport.py</name>
+			<type>1</type>
+			<location>C:/Users/tej/workspace/EncoderGenerator/findserialport.py</location>
+		</link>
+		<link>
+			<name>m2.py</name>
+			<type>1</type>
+			<location>C:/Users/tej/workspace/EncoderGenerator/m2.py</location>
+		</link>
+		<link>
+			<name>mainwindow.py</name>
+			<type>1</type>
+			<location>C:/Users/tej/workspace/EncoderGenerator/mainwindow.py</location>
+		</link>
+	</linkedResources>
+</projectDescription>
