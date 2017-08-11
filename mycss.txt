@@ -1,3 +1,4 @@
+
 QComboBox{
 	border: 2px solid gray;
 	border-radius: 5px;
@@ -11,7 +12,7 @@ QGroupBox{
 }
 
 QGroupBox::title {
-    top: -6px;
+    top: -5px;
     left: 15px;
 }
 QMenuBar{
