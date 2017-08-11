@@ -36,7 +36,7 @@ class MainWindow(QMainWindow, mainwindow.Ui_MainWindow):
             F= 1000000/(4*t*i)
             # speed = F*4/(8.280556)
             speed = F*4/(pulsesperdeg)
-            strm = '     Rot per second %.2f Frequency: %.2f ' %  (speed/360, F)
+            strm = '     Rot per second %.2f Frequency: %.2f changed text ' %  (speed/360, F)
             self.lwdgENC1.addItem(strm)
     
     
