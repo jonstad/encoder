@@ -1,6 +1,8 @@
 # encoder
 Encodertestingsw
 
+Use QT creator for GUI
+
 sudo apt-get install python3-pyqt5 
 
 Packages
