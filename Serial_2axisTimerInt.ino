@@ -8,6 +8,9 @@ int axis1counter=0;
 int axis1counterMax=32767;
 //int axis1counterMax=100;
 
+bool axis1forward=true;
+bool axis2forward=true;
+
 char axis2state=5;
 int axis2counter=0;
 int axis2counterMax=32767;
@@ -20,7 +23,7 @@ int inByte = 0;         // incoming serial byte
 String cmd ="";
 
 void setup() {
-  Timer1.initialize(12);         // initialize timer1, and set a 12 micro second period
+  Timer1.initialize(14);         // initialize timer1, and set a 14 micro second period
   Timer1.attachInterrupt(callback);  // attaches callback() as a timer overflow interrupt
 
   // Debugging output
@@ -73,17 +76,19 @@ void loop() {
             //axis1state=5;
             //axis2state=5;
             rxcounter=0;
-            rxbuf[0]=0; rxbuf[1]=0;    rxbuf[2]=0;     rxbuf[3]=0;     rxbuf[4]=0;     rxbuf[5]=0; 
+            rxbuf[0]=0; rxbuf[1]=0;    rxbuf[2]=0;     rxbuf[3]=0;     rxbuf[4]=0;     rxbuf[5]=0; rxbuf[6]=0;
            // cmd ="";
           }
           else{
             rxbuf[rxcounter]= inByte;
             //cmd.concat((char)inByte);   
             rxcounter++;
-           if (rxcounter==6) {
+           if (rxcounter==7) {
          
                 if(rxbuf[0]=='A'){
                    axis1counterMax=(rxbuf[1]-48)*10000+(rxbuf[2]-48)*1000+(rxbuf[3]-48)*100+(rxbuf[4]-48)*10+rxbuf[5]-48;
+                   if(rxbuf[6]=='1'){axis1forward=true;}
+                   else{axis1forward= false;}
                    //axis1counterMax=10;
                    //cmd="";
                    rxcounter=0;
@@ -92,39 +97,74 @@ void loop() {
                 }
                 else if(rxbuf[0]=='B'){
                    axis2counterMax=(rxbuf[1]-48)*10000+(rxbuf[2]-48)*1000+(rxbuf[3]-48)*100+(rxbuf[4]-48)*10+rxbuf[5]-48;
+                   if(rxbuf[6]=='1'){axis2forward=true;}
+                   else{axis2forward= false;}
                    //axis1counterMax=10;
                   // cmd="";
                    rxcounter=0;
                    if(axis2counterMax>=30000){axis2state = 5;}
                    else{axis2state=0;}
                 }
-            } 
+             } 
           }
    }
+      if(axis1forward==true){
+          if(axis1state==0){
+              PORTD |= 1<<PD2;       // sets output bit 2 high
+            }
+          if(axis1state==1){
+              PORTD |= 1<<PD3;       // sets output bit 3 high
+            }
+          if(axis1state==2){
+              PORTD &= ~(1<<PD2);    // sets output bit 2 low
+             }
+          if(axis1state==3){
+              PORTD &= ~(1<<PD3);    // sets output bit 3 low
+          }
+      }
+      else if (axis1forward==false){
+           if(axis1state==0){
+             PORTD |= 1<<PD3;       // sets output bit 3 high
+                          }
+          if(axis1state==1){
+             PORTD |= 1<<PD2;       // sets output bit 2 high
+            }
+          if(axis1state==2){
+             PORTD &= ~(1<<PD3);    // sets output bit 3 low
+                           }
+          if(axis1state==3){
+             PORTD &= ~(1<<PD2);    // sets output bit 2 low
+          }
+           }
 
-    if(axis1state==0){
-        PORTD |= 1<<PD2;       // sets output bit 2 high
-      }
-    if(axis1state==1){
-        PORTD |= 1<<PD3;       // sets output bit 3 high
-      }
-    if(axis1state==2){
-        PORTD &= ~(1<<PD2);    // sets output bit 2 low
-       }
-    if(axis1state==3){
-        PORTD &= ~(1<<PD3);    // sets output bit 3 low
-    }
-    
-    if(axis2state==0){
-        PORTD |= 1<<PD4;       // sets output bit 2 high
-      }
-    if(axis2state==1){
-        PORTD |= 1<<PD5;       // sets output bit 3 high
-      }
-    if(axis2state==2){
-        PORTD &= ~(1<<PD4);    // sets output bit 2 low
-       }
-    if(axis2state==3){
-        PORTD &= ~(1<<PD5);    // sets output bit 3 low
-    }  
+
+    if(axis2forward==true){
+       if(axis2state==0){
+        PORTD |= 1<<PD4;       // sets output bit 4 high
+        }
+       if(axis2state==1){
+        PORTD |= 1<<PD5;       // sets output bit 4 high
+        }
+       if(axis2state==2){
+        PORTD &= ~(1<<PD4);    // sets output bit 4 low
+         }
+        if(axis2state==3){
+        PORTD &= ~(1<<PD5);    // sets output bit 5 low
+        }  
+          }
+      
+      else if (axis2forward==false){
+      if(axis2state==0){
+        PORTD |= 1<<PD5;       // sets output bit 5 high      
+        }
+      if(axis2state==1){
+        PORTD |= 1<<PD4;       // sets output bit 4 high
+        }
+      if(axis2state==2){
+        PORTD &= ~(1<<PD5);    // sets output bit 5 low
+         }
+      if(axis2state==3){
+         PORTD &= ~(1<<PD4);    // sets output bit 4 low
+        }  
+ }
 }
